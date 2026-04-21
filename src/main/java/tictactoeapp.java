@@ -1,32 +1,92 @@
 import java.util.Random;
+import java.util.Scanner;
 
-public class tictactoeapp{
+public class TicTacToe {
+
+    static char[][] board = new char[3][3];
+
+    static boolean isHumanTurn;
+    static char humanSymbol;
+    static char computerSymbol;
+
     public static void main(String[] args) {
-        // 🎲 Random Number Generator
-        Random rand = new Random();
 
-        // 0 → Player 1 starts, 1 → Player 2 starts
-        int tossResult = rand.nextInt(2);
+        // UC1
+        initializeBoard();
+        printBoard();
 
-        // Game state variables
-        String currentPlayer;
-        char player1Symbol;
-        char player2Symbol;
+        // UC2
+        tossAndAssignSymbols();
+        displayTossResult();
 
-        // ⚖️ Conditional Logic for assigning symbols
-        if (tossResult == 0) {
-            currentPlayer = "Player 1";
-            player1Symbol = 'X';
-            player2Symbol = 'O';
+        // UC3
+        int slot = getUserSlot();
+        System.out.println("Slot entered: " + slot);
+    }
+
+
+
+    static void initializeBoard() {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                board[row][col] = '-';
+            }
+        }
+    }
+
+    static void printBoard() {
+        System.out.println("-------------");
+
+        for (int row = 0; row < 3; row++) {
+            System.out.print("| ");
+
+            for (int col = 0; col < 3; col++) {
+                System.out.print(board[row][col] + " | ");
+            }
+
+            System.out.println();
+            System.out.println("-------------");
+        }
+    }
+
+
+
+    static void tossAndAssignSymbols() {
+        Random random = new Random();
+        int toss = random.nextInt(2);
+
+        if (toss == 0) {
+            isHumanTurn = true;
+            humanSymbol = 'X';
+            computerSymbol = 'O';
         } else {
-            currentPlayer = "Player 2";
-            player1Symbol = 'O';
-            player2Symbol = 'X';
+            isHumanTurn = false;
+            humanSymbol = 'O';
+            computerSymbol = 'X';
+        }
+    }
+
+    static void displayTossResult() {
+        if (isHumanTurn) {
+            System.out.println("You won the toss!");
+            System.out.println("You play first.");
+        } else {
+            System.out.println("Computer won the toss!");
+            System.out.println("Computer plays first.");
         }
 
-        // 📢 Console Output
-        System.out.println("Toss Result: " + currentPlayer + " starts first!");
-        System.out.println("Player 1 Symbol: " + player1Symbol);
-        System.out.println("Player 2 Symbol: " + player2Symbol);
+        System.out.println("Your symbol: " + humanSymbol);
+        System.out.println("Computer symbol: " + computerSymbol);
+    }
+
+
+
+    static int getUserSlot() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a slot (1-9): ");
+        int slot = scanner.nextInt();
+
+        return slot;
     }
 }
