@@ -1,21 +1,32 @@
-public class tictactoeapp {
+import java.util.Random;
+
+public class TossForFirstPlayer {
     public static void main(String[] args) {
-        // 1️⃣ Create a 3x3 character array
-        char[][] board = new char[3][3];
+        // 🎲 Random Number Generator
+        Random rand = new Random();
 
-        // 2️⃣ Initialization Logic: fill all cells with '-'
-        for (int i = 0; i < 3; i++) {          // Outer loop → rows
-            for (int j = 0; j < 3; j++) {      // Inner loop → columns
-                board[i][j] = '-';
-            }
+        // 0 → Player 1 starts, 1 → Player 2 starts
+        int tossResult = rand.nextInt(2);
+
+        // Game state variables
+        String currentPlayer;
+        char player1Symbol;
+        char player2Symbol;
+
+        // ⚖️ Conditional Logic for assigning symbols
+        if (tossResult == 0) {
+            currentPlayer = "Player 1";
+            player1Symbol = 'X';
+            player2Symbol = 'O';
+        } else {
+            currentPlayer = "Player 2";
+            player1Symbol = 'O';
+            player2Symbol = 'X';
         }
 
-        // 3️⃣ Console Output Formatting: print the board clearly
-        for (int i = 0; i < 3; i++) {
-            System.out.println(" " + board[i][0] + " | " + board[i][1] + " | " + board[i][2]);
-            if (i < 2) { // Add separator lines between rows
-                System.out.println("---+---+---");
-            }
-        }
+        // 📢 Console Output
+        System.out.println("Toss Result: " + currentPlayer + " starts first!");
+        System.out.println("Player 1 Symbol: " + player1Symbol);
+        System.out.println("Player 2 Symbol: " + player2Symbol);
     }
 }
