@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class TossForFirstPlayer {
+public class tictactoeapp{
     public static void main(String[] args) {
         // 🎲 Random Number Generator
         Random rand = new Random();
